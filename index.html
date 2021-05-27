@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <div id="app">
+        <div class="row">
+            <div class="col-6">
+                <div class="img" :style='`width:${eni * 1.2}px; height:${boyi * 1.2}px`'>
+                    <img :src="`img/image${rasm}.jpg`" :style='`width:${eni * 1.2}px; height:${boyi * 1.2}px`' alt="">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="wrap">
+                    <div class="slider">
+                        <div @click='rasm=1'><span></span></div>
+                        <div @click='rasm=2'><span></span><span></span></div>
+                        <div @click='rasm=3'><span></span><span></span><span></span></div>
+                    </div>
+    
+                    <div class="razmer">
+                        <div class="eniga">
+                            <input class="raz" type="text" v-model='eni'>
+                            <div class="btnwrap">
+                                <button @click='eni +=10'>
+                                    <svg class="rotate" width="16" height="9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l7 7 7-7" stroke="#fff"/></svg>
+                                </button>
+                                <button @click='eni -=10'>
+                                    <svg width="16" height="9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l7 7 7-7" stroke="#fff"/></svg>
+                                </button>
+                            </div>
+                        </div>X
+                        <div class="boyiga">
+                            <input class="raz" type="text" v-model='boyi'>
+                            <div class="btnwrap">
+                                <button @click='boyi +=10'>
+                                    <svg class="rotate" width="16" height="9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l7 7 7-7" stroke="#fff"/></svg>
+                                </button>
+                                <button @click='boyi -=10'>
+                                    <svg width="16" height="9" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 1l7 7 7-7" stroke="#fff"/></svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <select v-model='turi'>
+                        <option value="null" disabled>Turini tanlang</option>
+                        <option value="200000">Plastik</option>
+                        <option value="300000">Steklo</option>
+                        <option value="400000">Alyuminiy</option>
+                    </select>
+                    <div class="narx">
+                        <div class="box">
+                            Umumiy narx
+                            <p style="font-size: 30px;"><b>{{(eni * boyi)/10000 * turi * rasm}} so'm</b></p>
+                        </div>
+                    </div>
+                    <div class="zakaz">
+                        <button @click='active = !active' v-if='(eni * boyi) / 10000 * turi * rasm > 0'>Buyurtma berish</button>
+                    </div>
+                    <div class="modal" :class="{'show':!active}">
+                        Sizning buyurtmangiz qabul qilindi!
+                        <p>
+                            Umumiy summa 
+                        </p>
+                        <b>{{(eni * boyi) / 10000 * turi * rasm}} so'm</b>
+                        <div class="exit" @click='active = !active'>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                eni: 150,
+                boyi: 150,
+                rasm: 1,
+                turi: null,
+                active: true,
+            }
+        })
+    </script>
+</body>
+</html>
